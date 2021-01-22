@@ -135,4 +135,10 @@ Para salvar o job basta clicar no botão salvar, ou cancelar se não quiser salv
 
 ## Construção de job
 
-### free-style
+Para construir job basta entrar no job em questão e clicar no botão construir agora e o jenkins executará. 
+
+Para mais informações procure a documentação do jenkins na internet. 
+
+[Jenkins User Documentation](https://www.jenkins.io/doc/)
+
+[Jenkins User Handbook](https://www.jenkins.io/user-handbook.pdf) (PDF)
