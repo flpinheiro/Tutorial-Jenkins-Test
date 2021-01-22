@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                // Get some code from a GitHub repository
+                git 'https://github.com/flpinheiro/Tutorial-Jenkins-Test.git'
+
+                // run dotnet test on a windows enviroment
+                bat "dotnet test"
+            }
+
+            post {
+                // If the test was successfull
+                success {
+                    echo 'test success'
+                }
+            }
+        }
+    }
+}

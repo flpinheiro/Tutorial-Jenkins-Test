@@ -1,6 +1,6 @@
 # Jenkins ambiente de test .Net 
 
-Neste tutorial estamos interessados em criar um job no jenkins da equipe de testes da `Compuletra`.
+Neste tutorial estamos interessados em criar um job no jenkins da equipe de testes da `Compuletra`, que foi instalado em um servidor `windows` no endereço http://10.0.0.238
 
 ## Acessando o ambiente
 
@@ -68,3 +68,71 @@ Também podemos definir em qual branch que deve ser feito o build.
 ![Gerenciamento de código Fonte](images/gerenciamento_codigo.png)
 
 * Build
+
+Aqui definimos os comandos a serem executados durante o build do projeto
+
+![Build](images/build.png)
+
+Sendo que os comando mais utilizados aqui são `Executar comando do Windows` e `Executar shell`, a funcionalidade deles é basicamente a mesma, porém é importante saber em qual ambiente seu jenkins está sendo executado, pois `Executar comando do Windows` somente funcionará em um servidor Windows e `Executar shell` somente funcionará em um servidor Linux, no entanto, exceto para comandos especificos de de sistema operacional funcionaram da mesma forma. 
+
+Para um projeto dedicado de teste o seguinte comando basta
+
+```shell
+dotnet test
+```
+Caso julgue necessário veja a documentação para mais opções
+
+[.NET CLI overview](https://docs.microsoft.com/pt-br/dotnet/core/tools/)
+
+### Pipeline
+
+Abaixo podemos ver a tela do pipeline, aqui usamos script para execução do job.
+
+![pipeline](images/pipeline.png)
+
+Neste caso a parte interessante é o campo pipeline, que possui duas opções
+
+* Pipeline script
+
+![pipeline script](images/pipeline_script.png)
+
+Neste caso o script do pipeline é escrito diretamente dentro do servidor jenkins. 
+
+* Pipeline script from SCM
+
+Neste caso o script é escrito em um arquivo que fica no repositorio e usualmente é chamado de `jenkinsfile`, onde podemos ver o exemplo básico de um jenkins file que irá a principio executar os testes de uma aplicação .Net dedicada a testes.
+
+![pipeline script](images/pipeline_script_scm.png)
+
+```c
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                // Get some code from a GitHub repository
+                git 'https://github.com/flpinheiro/Tutorial-Jenkins-Test.git'
+
+                // run dotnet test on a windows enviroment
+                bat "dotnet test"
+            }
+
+            post {
+                // If the test was successfull
+                success {
+                    echo 'test success'
+                }
+            }
+        }
+    }
+}
+```
+
+Para concluir essa parte do build temos o botão `pipeline Syntax` que traz uma serie de ajudas na criação de scripts.
+
+Para salvar o job basta clicar no botão salvar, ou cancelar se não quiser salvar nada.
+
+## Construção de job
+
+### free-style
