@@ -9,6 +9,9 @@ pipeline {
 
                 // run dotnet test on a windows enviroment
                 bat "dotnet test"
+
+                // run dotnet test on a linux enviroment
+                //sh "dotnet test"                
             }
 
             post {

@@ -142,3 +142,13 @@ Para mais informações procure a documentação do jenkins na internet.
 [Jenkins User Documentation](https://www.jenkins.io/doc/)
 
 [Jenkins User Handbook](https://www.jenkins.io/user-handbook.pdf) (PDF)
+
+## Plugins
+
+Segue o nome de alguns dos plugins de teste que usamos em testes anteriores. 
+
+* Test result analyzer
+* MS test
+* NUnit 
+* Selenium Html Report 
+* Html Publisher
